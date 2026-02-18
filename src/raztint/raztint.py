@@ -14,19 +14,19 @@ class RazTint:
     with support for Nerd Fonts, Unicode, and ASCII fallbacks.
     """
 
-    COLORS = COLORS
-    ICONS = ICONS
-
     def __init__(self) -> None:
+        self.colors = COLORS
+        self.icons = ICONS
+
         self.use_color: bool = self._supports_color()
         self.icon_mode: str = self._get_icon_mode()
 
-        for name, code in self.COLORS.items():
+        for name, code in self.colors.items():
             setattr(self, name.lower(), self._make_color_func(code))
 
-        for name, data in self.ICONS.items():
+        for name, data in self.icons.items():
             color_key = data.get("color", "WHITE")
-            color_code = self.COLORS.get(color_key, "37")
+            color_code = self.colors.get(color_key, "37")
             setattr(
                 self,
                 name,
