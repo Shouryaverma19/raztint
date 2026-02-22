@@ -21,7 +21,7 @@ jobs:
           allow-prereleases: true
 
       - name: Install build tools
-        run: pip install build
+        run: pip install -U build
 
       - name: Build package
         run: python -m build
