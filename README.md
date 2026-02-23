@@ -64,6 +64,12 @@ RazTint gives you:
 - Configurable: Granular control via Environment Variables.
 
 ---
+-
+## Requirements
+
+- Python 3.9 or newer
+
+---
 
 # Installation
 
@@ -195,13 +201,15 @@ RazTint determines the best available icon and color mode using the following ru
 
 You can control **RazTint** behavior using environment variables. This is useful for CI/CD pipelines or user overrides.
 
-| Environment Variable     | Value                    | Description                                                         |
-|--------------------------|--------------------------|---------------------------------------------------------------------|
-| `NO_COLOR`               | any                      | Disables all color output (standard specification).                 |
-| `RAZTINT_NO_COLOR`       | any                      | Specific override to disable RazTint colors.                        |
-| `RAZTINT_FORCE_COLOR`    | `1`, `true`, `yes`, `on` | Forces color output even if not a TTY.                              |
-| `RAZTINT_USE_NERD_ICONS` | `1`, `true`, `yes`, `on` | Forces the use of Nerd Font icons.                                  |
-| `RAZTINT_NO_NERD_ICONS`  | `1`, `true`, `yes`, `on` | Disables Nerd Font detection (falls back to Standard Unicode mode). |
+| Environment Variable             | Value                    | Description                                                                 |
+|----------------------------------|--------------------------|-----------------------------------------------------------------------------|
+| `NO_COLOR`                       | any                      | Disables all color output (standard specification).                         |
+| `RAZTINT_NO_COLOR`               | any                      | Specific override to disable RazTint colors.                                |
+| `RAZTINT_FORCE_COLOR`            | `1`, `true`, `yes`, `on` | Forces color output even if not a TTY.                                      |
+| `RAZTINT_USE_NERD_ICONS`         | `1`, `true`, `yes`, `on` | Forces the use of Nerd Font icons.                                          |
+| `RAZTINT_NO_NERD_ICONS`          | `1`, `true`, `yes`, `on` | Disables Nerd Font detection (falls back to Standard Unicode mode).         |
+| `RAZTINT_SKIP_SYSTEM_FONT_SCAN`  | `1`, `true`, `yes`, `on` | Skips OS-level font scanning; only environment-based nerd font hints used.  |
+| `RAZTINT_DEBUG`                  | `1`, `true`, `yes`, `on` | Enables debug logging about color/icon/font detection decisions to stderr.  |
 
 
 ### Programmatically:
@@ -360,6 +368,54 @@ Icon mode is determined by checking (in order):
 4. Falls back to Standard Unicode or ASCII based on encoding support
 
 If unsupported, RazTint transparently falls back to non-colored text and simpler icons.
+
+---
+
+## Performance & Debugging
+
+In most environments, RazTint's detection overhead is negligible thanks to internal caching. However, in restricted or slow environments you can:
+
+- Disable OS-level font scanning while still allowing env-based nerd font hints:
+
+  ```bash
+  RAZTINT_SKIP_SYSTEM_FONT_SCAN=1
+  ```
+
+- Inspect why a particular mode was chosen (color on/off, icon mode, font detection) by enabling debug logs:
+
+  ```bash
+  RAZTINT_DEBUG=1
+  ```
+
+Debug messages are printed to standard error and are disabled by default.
+
+---
+
+# Development
+
+If you want to work on RazTint locally:
+
+1. Clone the repository and install in editable mode with development tools:
+
+   ```bash
+   git clone https://github.com/razbuild/raztint.git
+   cd raztint
+   pip install -e .[dev]
+   ```
+
+2. Run the test suite:
+
+   ```bash
+   python -m pytest
+   ```
+
+3. Run formatting, linting, and type checking (kept in sync with CI):
+
+   ```bash
+   black src tests
+   ruff check src tests
+   ty check src tests
+   ```
 
 ---
 
