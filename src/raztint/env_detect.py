@@ -62,7 +62,9 @@ def get_icon_mode() -> str:
     try:
         "[󰄬]".encode(encoding)
     except Exception:
-        _debug(f"Icon mode: encoding {encoding!r} cannot encode Nerd icons, using ascii")
+        _debug(
+            f"Icon mode: encoding {encoding!r} cannot encode Nerd icons, using ascii"
+        )
         return "ascii"
 
     if os.getenv("RAZTINT_USE_NERD_ICONS", "").lower() in ("1", "true", "yes", "on"):

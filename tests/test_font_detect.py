@@ -25,7 +25,9 @@ class TestHasNerdFonts:
             assert has_nerd_fonts() is True
 
     def test_term_font_indicator(self) -> None:
-        with mock.patch.dict(os.environ, {"TERM_FONT": "JetBrains Mono Nerd"}, clear=True):
+        with mock.patch.dict(
+            os.environ, {"TERM_FONT": "JetBrains Mono Nerd"}, clear=True
+        ):
             assert has_nerd_fonts() is True
 
     def test_skip_system_font_scan_env(self) -> None:
@@ -69,4 +71,3 @@ class TestCheckInstalledNerdFonts:
             run.return_value.stdout = "Hack Nerd Font"
             assert check_installed_nerd_fonts() is True
             assert run.call_args is not None
-

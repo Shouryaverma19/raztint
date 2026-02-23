@@ -30,7 +30,9 @@ def check_installed_nerd_fonts() -> bool:
                 timeout=2,
             )
             has_fonts = result.returncode == 0 and bool(result.stdout.strip())
-            _debug(f"Font detection (Windows): returncode={result.returncode}, has_fonts={has_fonts}")
+            _debug(
+                f"Font detection (Windows): returncode={result.returncode}, has_fonts={has_fonts}"
+            )
             return has_fonts
         except Exception as exc:
             _debug(f"Font detection (Windows) failed: {exc!r}")
@@ -79,7 +81,9 @@ def check_installed_nerd_fonts() -> bool:
                     n in result.stdout.lower()
                     for n in ["nerd", "nf-", "hack nerd", "fira code nerd"]
                 )
-                _debug(f"Font detection (POSIX): returncode={result.returncode}, found={found}")
+                _debug(
+                    f"Font detection (POSIX): returncode={result.returncode}, found={found}"
+                )
                 return found
         except Exception as exc:
             _debug(f"Font detection (POSIX) failed: {exc!r}")
@@ -122,7 +126,9 @@ def has_nerd_fonts() -> bool:
         "yes",
         "on",
     ):
-        _debug("Nerd fonts: skipping system font scan due to RAZTINT_SKIP_SYSTEM_FONT_SCAN")
+        _debug(
+            "Nerd fonts: skipping system font scan due to RAZTINT_SKIP_SYSTEM_FONT_SCAN"
+        )
         return False
 
     return check_installed_nerd_fonts()

@@ -13,9 +13,7 @@ class TestSupportsColor:
                 assert supports_color() is False
 
     def test_force_color_overrides_non_tty(self) -> None:
-        with mock.patch.dict(
-            os.environ, {"RAZTINT_FORCE_COLOR": "1"}, clear=True
-        ):
+        with mock.patch.dict(os.environ, {"RAZTINT_FORCE_COLOR": "1"}, clear=True):
             fake_stdout = mock.Mock()
             fake_stdout.isatty.return_value = False
             with mock.patch("raztint.env_detect.sys.stdout", fake_stdout):
@@ -84,9 +82,7 @@ class TestGetIconMode:
         fake_stdout.encoding = "utf-8"
         with mock.patch("raztint.env_detect.sys.stdout", fake_stdout):
             with mock.patch.dict(os.environ, {}, clear=True):
-                with mock.patch(
-                    "raztint.env_detect.has_nerd_fonts", return_value=True
-                ):
+                with mock.patch("raztint.env_detect.has_nerd_fonts", return_value=True):
                     assert get_icon_mode() == "nerd"
 
     def test_std_mode_when_no_fonts_detected(self) -> None:
@@ -104,4 +100,3 @@ def test_enable_windows_vt_mode_handles_missing_windll() -> None:
     with mock.patch("raztint.env_detect.ctypes", create=True) as fake_ctypes:
         fake_ctypes.windll = None
         assert enable_windows_vt_mode() is False
-
