@@ -31,7 +31,8 @@ def check_installed_nerd_fonts() -> bool:
             )
             has_fonts = result.returncode == 0 and bool(result.stdout.strip())
             _debug(
-                f"Font detection (Windows): returncode={result.returncode}, has_fonts={has_fonts}"
+                "Font detection (Windows): "
+                f"returncode={result.returncode}, has_fonts={has_fonts}"
             )
             return has_fonts
         except Exception as exc:
@@ -82,7 +83,8 @@ def check_installed_nerd_fonts() -> bool:
                     for n in ["nerd", "nf-", "hack nerd", "fira code nerd"]
                 )
                 _debug(
-                    f"Font detection (POSIX): returncode={result.returncode}, found={found}"
+                    "Font detection (POSIX): "
+                    f"returncode={result.returncode}, found={found}"
                 )
                 return found
         except Exception as exc:
