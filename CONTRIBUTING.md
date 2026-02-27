@@ -23,7 +23,7 @@ To set up your local environment for development:
 
 1. **Fork** the repository and clone it locally:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/raztint.git
+   git clone https://github.com/razbuild/raztint.git
    cd raztint
    ```
 
@@ -76,7 +76,7 @@ black .
 
 ### Run Type Checking
 ```bash
-mypy .
+ty check src
 ```
 
 ### Run All Checks
