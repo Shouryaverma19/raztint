@@ -6,11 +6,27 @@
 ![PyPI - Version](https://img.shields.io/pypi/v/raztint?pypiBaseUrl=https%3A%2F%2Fpypi.org&logo=pypi&logoColor=ffffff&logoSize=auto&label=PyPi&labelColor=1b1b1b&color=ab0000&cacheSeconds=3600)
 ![Python Version from PEP 621 TOML](https://img.shields.io/python/required-version-toml?tomlFilePath=https%3A%2F%2Fraw.githubusercontent.com%2Frazbuild%2Fraztint%2Fmaster%2Fpyproject.toml&logo=python&logoColor=ffffff&logoSize=auto&label=Python&labelColor=1b1b1b&color=ffc500&cacheSeconds=3600)
 
+A zero-dependency Python library for ANSI coloring and smart CLI icons that automatically adapt to your environment.
 ---
 
-## Preview
+## Table of Contents
+- [Preview](#preview)
+- [What is RazTint?](#what-is-raztint)
+- [Why RazTint?](#why-raztint)
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Configuration](#configuration)
+- [API Reference](#api-reference)
+- [Icons & Detection](#icons--detection)
+- [Performance & Debugging](#performance--debugging)
+- [Development](#development)
+- [Support](#support)
+- [License](#license)
 
-A zero-dependency Python library for ANSI coloring and smart CLI icons with automatic environment detection.
+---
+## Preview
 
 | ASCII Icons                                                                          | Nerd Font Icons                                                                             | Unicode Icons                                                                            |
 |--------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
@@ -18,74 +34,55 @@ A zero-dependency Python library for ANSI coloring and smart CLI icons with auto
 
 ---
 
-RazTint supports:
-- Zero Dependencies: Built entirely with the Python standard library.
-- Smart Icon Sets: Automatically degrades from **Nerd Fonts** → **Unicode** → **ASCII** based on the environment.
-- Automatic Detection: Detects `NO_COLOR`, `TERM`, and `isatty` to enable/disable features appropriately.
-- Windows Support: Automatically enables Virtual Terminal (VT) processing on Windows systems using `ctypes`.
-- Type Hinted: Fully typed for excellent IDE support and autocompletion.
-- Configurable: Granular control via Environment Variables.
-
-This library is suitable for CLIs, logs, and tools that need portable, readable terminal output.
+## What is RazTint?
+RazTint is a zero-dependency Python library for colored terminal output and smart CLI icons that automatically adapt to your environment.
 
 ---
 
 ## Why RazTint?
 
-RazTint is intentionally minimal and zero-dependency.  
-If you need a lightweight alternative to `colorama` or `rich` for:
+If you need a lightweight alternative to colorama or rich for simple CLI tools, RazTint focuses on:
 
-- Simple CLI tools
-- Scripts
-- Logging utilities
-- Cross-platform terminal output
-
-RazTint gives you:
 - Zero dependencies
 - Automatic icon fallback (Nerd → Unicode → ASCII)
 - Automatic color detection
-- Configurable behaviour with environment variables
-- Very small runtime overhead
+- Cross-platform behavior
+- Minimal runtime overhead
 
 ---
 
 ## Features
 
-- Zero Dependencies: Built entirely with the Python standard library.
-
-- Smart Icon Sets: Automatically degrades from Nerd Fonts → Unicode → ASCII based on the environment.
-
-- Automatic Detection: Detects NO_COLOR, TERM, and isatty to enable/disable features appropriately.
-
-- Windows Support: Automatically enables Virtual Terminal (VT) processing on Windows systems using ctypes.
-
-- Type Hinted: Fully typed for excellent IDE support and autocompletion.
-
-- Configurable: Granular control via Environment Variables.
+- Zero dependencies (standard library only)
+- Smart icon fallback (Nerd → Unicode → ASCII)
+- Automatic color detection
+- Windows VT support
+- Fully typed API
+- Environment-based configuration
 
 ---
--
+
 ## Requirements
 
 - Python 3.9 or newer
 
 ---
 
-# Installation
+## Installation
 
-## From PyPI
+### From PyPI
 
 ```bash
 pip install raztint
 ```
 
-## With pipx
+### With pipx
 
 ```bash
 pipx install raztint
 ```
 
-## From source
+### From source
 
 ```bash
 git clone https://github.com/razbuild/raztint.git
@@ -93,10 +90,6 @@ cd raztint
 
 pip install -e .  # -e allows you to modify the source code in place
 ```
-
-## How to install Nerd Font?
-
-To install Nerd Fonts, visit the official [website](https://www.nerdfonts.com/font-downloads).
 
 ---
 
@@ -122,6 +115,15 @@ print(f"{info()} Analysis in progress...")
 print(f"{warn()} Disk space low.")
 ```
 
+### Using the `tint` Instance
+
+```python
+from raztint import tint
+
+print(tint.red("text"))
+print(tint.ok(), "hello")
+```
+
 ### Class-based Usage
 
 Useful if you need to toggle color support dynamically within an application instance or want a scoped instance.
@@ -135,15 +137,6 @@ tint = RazTint()
 tint.set_color(False) 
 
 print(tint.blue("This will be plain text now because color is disabled."))
-```
-
-### Using the `tint` Instance
-
-```python
-from raztint import tint
-
-print(tint.red("text"))
-print(tint.ok(), "hello")
 ```
 
 ---
@@ -194,6 +187,10 @@ RazTint determines the best available icon and color mode using the following ru
    - Used when:
      - Output encoding is not UTF-8 (cannot encode Nerd Font or Unicode characters), OR
      - System encoding test fails for Unicode characters
+
+### How to install Nerd Font?
+
+To install Nerd Fonts, visit the official [website](https://www.nerdfonts.com/font-downloads).
 
 ---
 
@@ -344,10 +341,6 @@ Current icon mode being used. Possible values:
 
 ---
 
-# Automatic Behavior
-
-RazTint intelligently detects and adapts to the environment:
-
 ## Color Detection
 
 Color support is determined by checking (in order):
@@ -358,16 +351,6 @@ Color support is determined by checking (in order):
 5. `TERM` environment variable (must not be "dumb")
 
 If color is not supported, all color functions return plain text.
-
-## Icon Detection
-
-Icon mode is determined by checking (in order):
-1. Encoding capability (can the system encode Nerd Font characters?)
-2. `RAZTINT_USE_NERD_ICONS` or `RAZTINT_NO_NERD_ICONS` environment variables
-3. System-level Nerd Font detection (see Detection Logic section)
-4. Falls back to Standard Unicode or ASCII based on encoding support
-
-If unsupported, RazTint transparently falls back to non-colored text and simpler icons.
 
 ---
 
@@ -419,6 +402,15 @@ If you want to work on RazTint locally:
 
 ---
 
+## Support
+
+- 🐛 **Found a bug?** [Open an issue](https://github.com/razbuild/raztint/issues)
+- 💡 **Have a suggestion?** [Open an issue](https://github.com/razbuild/raztint/issues)
+- 📧 **Questions?** Check the [Documentation](https://github.com/razbuild/raztint/blob/master/docs/)
+
+---
+
 # License
 
 MIT License
+
