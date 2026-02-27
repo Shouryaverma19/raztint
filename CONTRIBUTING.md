@@ -42,7 +42,7 @@ To set up your local environment for development:
    - `pytest` - Testing framework
    - `ruff` - Linter
    - `black` - Code formatter
-   - `mypy` - Type checker
+   - `ty` - Type checker
    - `coverage` - Test coverage tool
 
 ## Running Tests and Quality Checks
