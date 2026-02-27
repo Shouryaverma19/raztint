@@ -7,6 +7,7 @@
 ![Python Version from PEP 621 TOML](https://img.shields.io/python/required-version-toml?tomlFilePath=https%3A%2F%2Fraw.githubusercontent.com%2Frazbuild%2Fraztint%2Fmaster%2Fpyproject.toml&logo=python&logoColor=ffffff&logoSize=auto&label=Python&labelColor=1b1b1b&color=ffc500&cacheSeconds=3600)
 
 A zero-dependency Python library for ANSI coloring and smart CLI icons that automatically adapt to your environment.
+
 ---
 
 ## Table of Contents
