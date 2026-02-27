@@ -244,9 +244,9 @@ RAZTINT_NO_NERD_ICONS=1
 
 ---
 
-# API Reference
+## API Reference
 
-## Color Functions
+### Color Functions
 
 The following functions return strings wrapped with ANSI styling when supported:
 
@@ -375,7 +375,7 @@ Debug messages are printed to standard error and are disabled by default.
 
 ---
 
-# Development
+## Development
 
 If you want to work on RazTint locally:
 
@@ -411,7 +411,7 @@ If you want to work on RazTint locally:
 
 ---
 
-# License
+## License
 
 MIT License
 
