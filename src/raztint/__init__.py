@@ -4,20 +4,20 @@ __version__ = "0.2.0"
 
 tint = RazTint()
 
-ok = tint.ok  # type: ignore[attr-defined]
-err = tint.err  # type: ignore[attr-defined]
-warn = tint.warn  # type: ignore[attr-defined]
-info = tint.info  # type: ignore[attr-defined]
+ok = tint.ok  # type: ignore
+err = tint.err  # type: ignore
+warn = tint.warn  # type: ignore
+info = tint.info  # type: ignore
 
-black = tint.black  # type: ignore[attr-defined]
-red = tint.red  # type: ignore[attr-defined]
-green = tint.green  # type: ignore[attr-defined]
-yellow = tint.yellow  # type: ignore[attr-defined]
-blue = tint.blue  # type: ignore[attr-defined]
-magenta = tint.magenta  # type: ignore[attr-defined]
-cyan = tint.cyan  # type: ignore[attr-defined]
-white = tint.white  # type: ignore[attr-defined]
-gray = tint.gray  # type: ignore[attr-defined]
+black = tint.black  # type: ignore
+red = tint.red  # type: ignore
+green = tint.green  # type: ignore
+yellow = tint.yellow  # type: ignore
+blue = tint.blue  # type: ignore
+magenta = tint.magenta  # type: ignore
+cyan = tint.cyan  # type: ignore
+white = tint.white  # type: ignore
+gray = tint.gray  # type: ignore
 
 __all__ = [
     "RazTint",
