@@ -3,7 +3,7 @@
 ![GitHub License](https://img.shields.io/github/license/razbuild/raztint?logoColor=ffffff&logoSize=auto&label=License&labelColor=1b1b1b&color=ab0000&cacheSeconds=3600)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/razbuild/raztint/ci.yml?branch=master&event=push&logo=githubactions&logoColor=ffffff&logoSize=auto&label=Build&labelColor=1b1b1b&color=ffc500&cacheSeconds=3600)
 ![Codecov](https://img.shields.io/codecov/c/github/razbuild/raztint?logo=codecov&logoColor=ffffff&logoSize=auto&label=Coverage&labelColor=1b1b1b&color=0d55cd&cacheSeconds=3600)
-![PyPI - Version](https://img.shields.io/pypi/v/raztint?pypiBaseUrl=https%3A%2F%2Fpypi.org&logo=pypi&logoColor=ffffff&logoSize=auto&label=PyPi&labelColor=1b1b1b&color=ab0000&cacheSeconds=3600)
+![PyPI - Version](https://img.shields.io/pypi/v/raztint?pypiBaseUrl=https%3A%2F%2Fpypi.org&logo=pypi&logoColor=ffffff&logoSize=auto&label=PyPI&labelColor=1b1b1b&color=ab0000&cacheSeconds=3600)
 ![Python Version from PEP 621 TOML](https://img.shields.io/python/required-version-toml?tomlFilePath=https%3A%2F%2Fraw.githubusercontent.com%2Frazbuild%2Fraztint%2Fmaster%2Fpyproject.toml&logo=python&logoColor=ffffff&logoSize=auto&label=Python&labelColor=1b1b1b&color=ffc500&cacheSeconds=3600)
 
 A zero-dependency Python library for ANSI coloring and smart CLI icons that automatically adapt to your environment.
@@ -42,30 +42,37 @@ RazTint is a zero-dependency Python library for colored terminal output and smar
 
 ## Why RazTint?
 
-If you need a lightweight alternative to colorama or rich for simple CLI tools, RazTint focuses on:
+Most CLI coloring libraries either pull in many dependencies (like `rich`) or 
+need platform-specific workarounds. RazTint was built for developers who want:
 
-- Zero dependencies
-- Automatic icon fallback (Nerd → Unicode → ASCII)
-- Automatic color detection
-- Cross-platform behavior
-- Minimal runtime overhead
+- **A single-file copy-pasteable solution** without any dependency hell.
+- **Smart icons** that look great whether the user has a Nerd Font installed or 
+  not, without manual configuration.
+- **Predictable cross-platform behavior** — it works identically on Linux, macOS, 
+  and Windows, even in CI environments.
+- **Minimal decisions to make** — just import and use; it auto-detects everything.
+
+If you’ve ever included a 30-line color script in a small CLI tool, RazTint is 
+that script, done right and fully tested.
 
 ---
 
 ## Features
 
-- Zero dependencies (standard library only)
-- Smart icon fallback (Nerd → Unicode → ASCII)
-- Automatic color detection
-- Windows VT support
-- Fully typed API
-- Environment-based configuration
+- Zero external dependencies (Python ≥ 3.10 standard library only)
+- Three-tiered icon fallback: Nerd Font → Unicode → ASCII, with environment-aware detection
+- Full ANSI 16-color support for foreground text
+- Automatic TTY and Windows VT detection
+- Fully type-hinted public API
+- Configurable via environment variables (`NO_COLOR`, `RAZTINT_FORCE_COLOR`, ...)
+- Debug mode for troubleshooting font/color detection (`RAZTINT_DEBUG=1`)
+- Cached detection results for negligible runtime overhead
 
 ---
 
 ## Requirements
 
-- Python 3.9 or newer
+- Python 3.10 or newer
 
 ---
 
@@ -75,12 +82,6 @@ If you need a lightweight alternative to colorama or rich for simple CLI tools, 
 
 ```bash
 pip install raztint
-```
-
-### With pipx
-
-```bash
-pipx install raztint
 ```
 
 ### From source
@@ -124,6 +125,7 @@ from raztint import tint
 print(tint.red("text"))
 print(tint.ok(), "hello")
 ```
+`tint` is a pre-instantiated singleton of `RazTint` for convenience.
 
 ### Class-based Usage
 
@@ -209,39 +211,6 @@ You can control **RazTint** behavior using environment variables. This is useful
 | `RAZTINT_SKIP_SYSTEM_FONT_SCAN`  | `1`, `true`, `yes`, `on` | Skips OS-level font scanning; only environment-based nerd font hints used.  |
 | `RAZTINT_DEBUG`                  | `1`, `true`, `yes`, `on` | Enables debug logging about color/icon/font detection decisions to stderr.  |
 
-
-### Programmatically:
-```python
-from raztint import tint
-tint.set_color(False)
-```
-
-### Disable Colors
-
-```
-NO_COLOR=1
-```
-
-## Icon Behavior Configuration
-
-### Always Use Nerd Icons
-
-```
-RAZTINT_USE_NERD_ICONS=1
-```
-
-### Force-enable Colors
-
-```
-RAZTINT_FORCE_COLOR=1
-```
-
-### Disable Nerd Icons
-
-```
-RAZTINT_NO_NERD_ICONS=1
-```
-
 ---
 
 ## API Reference
@@ -250,23 +219,16 @@ RAZTINT_NO_NERD_ICONS=1
 
 The following functions return strings wrapped with ANSI styling when supported:
 
-- `black(text)`
-
-- `red(text)`
-
-- `green(text)`
-
-- `yellow(text)`
-
-- `blue(text)`
-
-- `magenta(text)`
-
-- `cyan(text)`
-
-- `white(text)`
-
-- `gray(text)`
+| Standard Colors | Bright Variants      |
+|-----------------|----------------------|
+| `black(text)`   | `gray(text)`         |
+| `red(text)`     | `bright_red(text)`   |
+| `green(text)`   | `bright_green(text)` |
+| `yellow(text)`  | `bright_yellow(text)`|
+| `blue(text)`    | `bright_blue(text)`  |
+| `magenta(text)` | `bright_magenta(text)`|
+| `cyan(text)`    | `bright_cyan(text)`  |
+| `white(text)`   | `bright_white(text)` |
 
 Internally, these use `tint.color()`.
 
@@ -407,7 +369,6 @@ If you want to work on RazTint locally:
 
 - 🐛 **Found a bug?** [Open an issue](https://github.com/razbuild/raztint/issues)
 - 💡 **Have a suggestion?** [Open an issue](https://github.com/razbuild/raztint/issues)
-- 📧 **Questions?** Check the [Documentation](https://github.com/razbuild/raztint/blob/master/docs/)
 
 ---
 
