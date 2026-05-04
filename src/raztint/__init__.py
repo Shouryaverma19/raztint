@@ -18,6 +18,13 @@ magenta = tint.magenta  # type: ignore
 cyan = tint.cyan  # type: ignore
 white = tint.white  # type: ignore
 gray = tint.gray  # type: ignore
+bright_red = tint.bright_red  # type: ignore
+bright_green = tint.bright_green  # type: ignore
+bright_yellow = tint.bright_yellow  # type: ignore
+bright_blue = tint.bright_blue  # type: ignore
+bright_magenta = tint.bright_magenta  # type: ignore
+bright_cyan = tint.bright_cyan  # type: ignore
+bright_white = tint.bright_white  # type: ignore
 
 __all__ = [
     "RazTint",
@@ -35,5 +42,12 @@ __all__ = [
     "cyan",
     "white",
     "gray",
+    "bright_red",
+    "bright_green",
+    "bright_yellow",
+    "bright_blue",
+    "bright_magenta",
+    "bright_cyan",
+    "bright_white",
     "__version__",
 ]
