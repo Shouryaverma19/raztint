@@ -238,7 +238,7 @@ The following functions return strings wrapped with ANSI styling when supported:
 
 Internally, these use `tint.color()`.
 
-### Text Style Functions  <-- عنوان جدید
+### Text Style Functions
 In addition to colors, RazTint provides functions for applying text styles. 
 These styles use their own reset codes, so applying a style won't remove any color you have already applied.
 
