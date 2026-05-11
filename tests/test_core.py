@@ -2,6 +2,7 @@ import os
 from unittest import mock
 
 from raztint.core import RazTint
+from raztint.styles import STYLES
 
 
 class TestColorizer:
@@ -140,3 +141,56 @@ class TestColorizer:
 
         raztint.set_color(False)
         assert raztint.use_color is False
+
+    def test_style_methods_exist(self):
+        """Check that dynamic style methods are created from STYLES."""
+        raztint = RazTint()
+        for style_name in STYLES:
+            assert hasattr(raztint, style_name.lower()), f"Missing style method: {style_name}"
+
+    def test_style_disabled_returns_plain_text(self):
+        """When color is disabled, style methods should return plain text."""
+        raztint = RazTint()
+        raztint.set_color(False)
+        for style_name in STYLES:
+            method = getattr(raztint, style_name.lower())
+            assert method("test") == "test", f"Style {style_name} should return plain text"
+
+    def test_style_enabled_uses_correct_ansi_codes(self):
+        """Each style should wrap text with its specific on/off ANSI codes."""
+        raztint = RazTint()
+        raztint.set_color(True)
+
+        for style_name, (on_code, off_code) in STYLES.items():
+            method = getattr(raztint, style_name.lower())
+            result = method("test")
+            assert f"\033[{on_code}m" in result
+            assert f"\033[{off_code}m" in result
+            assert "\033[0m" not in result, (
+                f"{style_name} should use targeted reset, not \\033[0m"
+            )
+
+    def test_style_method_direct(self):
+        """Direct call to style() method should behave consistently."""
+        raztint = RazTint()
+        raztint.set_color(False)
+        assert raztint.style("test", "1", "22") == "test"
+
+        raztint.set_color(True)
+        result = raztint.style("test", "1", "22")
+        assert result.startswith("\033[1m")
+        assert "test" in result
+        assert result.endswith("\033[22m")
+
+    def test_style_does_not_reset_color(self):
+        """Verify that applying a style after a color preserves the color."""
+        raztint = RazTint()
+        raztint.set_color(True)
+
+        combined = raztint.red(raztint.bold("test"))
+        assert "\033[31m" in combined
+        assert "\033[1m" in combined
+        assert "\033[22m" in combined
+        assert combined.endswith("\033[0m")
+        style_part = combined[combined.index("\033[1m"):combined.index("\033[22m") + len("\033[22m")]
+        assert "\033[0m" not in style_part
