@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.4.0] - 2026-05-11
+
+### Added
+- **Text style support**: New functions `bold`, `dim`, `italic`, `underline`, and `strikethrough` allow applying text styles without breaking existing ANSI colors. Each style uses its own reset code to preserve color when removed. Implemented by [@wangstrider](https://github.com/wangstrider) in [#3](https://github.com/razbuild/raztint/pull/3).
+- Comprehensive test coverage for all new style functions.
+
+### Docs
+- Full documentation for text styles in README and API reference.
+
+---
+
 ## [0.3.0] - 2026-05-04
 
 ### Added

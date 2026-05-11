@@ -64,6 +64,7 @@ that script, done right and fully tested.
 - Full ANSI 16-color support for foreground text
 - Automatic TTY and Windows VT detection
 - Fully type-hinted public API
+- Support for text styles: bold, dim, italic, underline, and strikethrough
 - Configurable via environment variables (`NO_COLOR`, `RAZTINT_FORCE_COLOR`, ...)
 - Debug mode for troubleshooting font/color detection (`RAZTINT_DEBUG=1`)
 - Cached detection results for negligible runtime overhead
@@ -110,6 +111,10 @@ from raztint import green, red, ok, err, info, warn
 print(green("Success! The operation completed."))
 print(red("Critical Error: Database not found."))
 
+# Styling text
+print(bold("This is bold text."))
+print(underline(red("This is underlined red text.")))
+
 # Using Icons (Auto-adapts to Nerd Font/Unicode/ASCII)
 print(f"{ok()} File saved successfully.")
 print(f"{err()} Connection failed.")
@@ -143,6 +148,7 @@ print(tint.blue("This will be plain text now because color is disabled."))
 ```
 
 ---
+
 ## Icons & Detection
 
 ### Icon Functions
@@ -231,6 +237,29 @@ The following functions return strings wrapped with ANSI styling when supported:
 | `white(text)`   | `bright_white(text)` |
 
 Internally, these use `tint.color()`.
+
+### Text Style Functions  <-- عنوان جدید
+In addition to colors, RazTint provides functions for applying text styles. 
+These styles use their own reset codes, so applying a style won't remove any color you have already applied.
+
+| Function            | Description                |
+|---------------------|----------------------------|
+| `bold(text)`        | Makes text **bold**        |
+| `dim(text)`         | Makes text dimmed          |
+| `italic(text)`      | Makes text *italic*        |
+| `underline(text)`   | Underlines text            |
+| `strikethrough(text)`| Applies strikethrough      |
+
+**Example:**
+```python
+from raztint import bold, italic, underline, red
+
+# Mixing styles with colors
+print(bold(red("This is a very important error message.")))
+print(italic("This text is italic."))
+print(underline("This text is underlined."))
+```
+> Known Limitation: bold and dim share the same ANSI reset code. Nesting one inside the other may lead to unexpected behavior.
 
 ---
 
