@@ -105,7 +105,7 @@ You can import functions directly for quick usage, or instantiate the class for 
 The easiest way to use RazTint is importing the pre-instantiated helpers:
 
 ```python
-from raztint import green, red, ok, err, info, warn
+from raztint import green, red, ok, err, info, warn, bold, underline
 
 # Coloring text
 print(green("Success! The operation completed."))
