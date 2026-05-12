@@ -394,7 +394,7 @@ If you want to work on RazTint locally:
    ```bash
    git clone https://github.com/razbuild/raztint.git
    cd raztint
-   pip install -e .[dev]
+   uv sync --group dev
    ```
 
 2. Run the test suite:
