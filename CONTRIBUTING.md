@@ -29,13 +29,13 @@ To set up your local environment for development:
 
 2. Create a virtual environment:
    ```bash
-   python -m venv venv
+   python -m venv .venv
    source venv/bin/activate  # On Windows: .\venv\Scripts\activate
    ```
 
 3. Install the project in editable mode with development dependencies:
    ```bash
-   pip install -e .[dev]
+   uv sync --group dev
    ```
    
    This installs:

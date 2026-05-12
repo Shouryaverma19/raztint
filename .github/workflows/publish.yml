@@ -1,4 +1,4 @@
-name: Publish to PyPI
+name: Publish
 
 on:
   release:
@@ -14,17 +14,13 @@ jobs:
     steps:
       - uses: actions/checkout@v6.0.2
 
-      - name: Set up Python
-        uses: actions/setup-python@v6.2.0
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8.1.0
         with:
-          python-version: "3.13"
-          allow-prereleases: true
-
-      - name: Install build tools
-        run: pip install -U build
+          enable-cache: true
 
       - name: Build package
-        run: python -m build
+        run: uv build
 
-      - name: pypi-publish
-        uses: pypa/gh-action-pypi-publish@v1.14.0
+      - name: Publish to PyPI
+        run: uv publish
