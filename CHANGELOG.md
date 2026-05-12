@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.1] - 2026-05-12
+
+### Fixed
+- `__version__` now correctly reflects the installed version using `importlib.metadata`.  
+  Previously, it was hardcoded to `0.3.0`, causing confusion with the actual package version.
+
+---
+
 ## [0.4.0] - 2026-05-11
 
 ### Added

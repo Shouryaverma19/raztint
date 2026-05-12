@@ -1,6 +1,8 @@
+from importlib.metadata import version
+
 from .core import RazTint
 
-__version__ = "0.3.0"
+__version__ = version("raztint")
 
 tint = RazTint()
 
