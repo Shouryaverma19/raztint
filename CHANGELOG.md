@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.5.0] - 2026-05-12
+
+### Added
+- feat: support for ANSI background colors [#5](https://github.com/razbuild/raztint/pull/5) by [@snoopuppy582](https://github.com/snoopuppy582)
+- test: add unit tests for background color parsing
+
+### Docs
+- docs: update README with new color examples
+
+---
+
 ## [0.4.1] - 2026-05-12
 
 ### Fixed

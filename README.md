@@ -65,6 +65,7 @@ that script, done right and fully tested.
 - Automatic TTY and Windows VT detection
 - Fully type-hinted public API
 - Support for text styles: bold, dim, italic, underline, and strikethrough
+- ANSI 16-color support for background text (8 standard + 8 bright)
 - Configurable via environment variables (`NO_COLOR`, `RAZTINT_FORCE_COLOR`, ...)
 - Debug mode for troubleshooting font/color detection (`RAZTINT_DEBUG=1`)
 - Cached detection results for negligible runtime overhead

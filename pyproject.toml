@@ -1,6 +1,6 @@
 [project]
 name = "raztint"
-version = "0.4.1"
+version = "0.5.0"
 description = "A zero-dependency Python library for ANSI coloring and smart CLI icons with automatic environment detection"
 readme = { file = "README.md", content-type = "text/markdown" }
 requires-python = ">=3.10"
