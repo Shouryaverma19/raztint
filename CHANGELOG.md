@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.6.0] - 2026-05-13
+
+### Added
+- `format_text()` method for applying foreground color, background color, and multiple text styles in a single call. ([@githubuser16384](https://github.com/githubuser16384) in [#8](https://github.com/razbuild/raztint/pull/8))
+- New tests for `format_text()` covering edge cases, validation, and environment toggles.
+
+### Changed
+- Migrated project tooling from pip to uv, including CI configuration.
+- Updated README with usage examples for the new `format_text()` helper.
+
+---
+
 ## [0.5.0] - 2026-05-12
 
 ### Added
