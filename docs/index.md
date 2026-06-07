@@ -9,7 +9,7 @@ Welcome to the RazTint documentation. The [README](../README.md) covers installa
 | [Getting Started](getting-started.md) | Import styles, `paint()`, and class-based usage |
 | [API Reference](api-reference.md) | Every public function, parameter, and class attribute |
 | [Intents](intents.md) | Semantic message presets (`success`, `danger`, …) |
-| [Security & Redaction](security.md) | `redact()` and built-in secret masking rules |
+| [Security & Redaction](redaction.md) | `redact()` and built-in secret masking rules |
 | [Icons & Detection](icons-and-detection.md) | Nerd Font / Unicode / ASCII modes and how they are chosen |
 | [Configuration](configuration.md) | Environment variables, color detection, debugging |
 | [Development](development.md) | Contributing, running tests, and CI checks |
