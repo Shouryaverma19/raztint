@@ -1,6 +1,6 @@
 # Getting Started
 
-[← Documentation index](index.md)
+[← Documentation index](https://github.com/razbuild/raztint/blob/master/docs/index.md)
 
 You can use RazTint in three ways: import helpers directly, call `paint()` for combined formatting, or create a `RazTint` instance for scoped control.
 
@@ -121,7 +121,7 @@ Each instance carries its own `use_color` and `icon_mode` state.
 
 ## Intents
 
-Apply semantic presets with a single parameter. See [Intents](intents.md) for the full registry.
+Apply semantic presets with a single parameter. See [Intents](https://github.com/razbuild/raztint/blob/master/docs/intents.md) for the full registry.
 
 ```python
 from raztint import paint
@@ -137,7 +137,7 @@ Explicit `color`, `icon`, or `styles` arguments override the intent defaults.
 
 ## Redaction
 
-Mask secrets before they reach the terminal. See [Security & Redaction](security.md).
+Mask secrets before they reach the terminal. See [Security & Redaction](https://github.com/razbuild/raztint/blob/master/docs/redaction.md).
 
 ```python
 from raztint import paint, redact
@@ -146,13 +146,14 @@ from raztint import paint, redact
 safe = redact("password=supersecret")
 
 # Combined with formatting
-print(paint(f"Config: {raw}", intent="debug", redact=True))
+raw = "Connected as user:pass@db.internal token=ghp_secret"
+print(paint(raw, intent="debug", redact=True))
 ```
 
 ---
 
 ## Next steps
 
-- [API Reference](api-reference.md) — full parameter lists and helper tables
-- [Configuration](configuration.md) — environment variables for CI and overrides
-- [Icons & Detection](icons-and-detection.md) — how icon modes are chosen
+- [API Reference](https://github.com/razbuild/raztint/blob/master/docs/api-reference.md) — full parameter lists and helper tables
+- [Configuration](https://github.com/razbuild/raztint/blob/master/docs/configuration.md) — environment variables for CI and overrides
+- [Icons & Detection](https://github.com/razbuild/raztint/blob/master/docs/icons-and-detection.md) — how icon modes are chosen
