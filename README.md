@@ -3,7 +3,7 @@
   <br><br>
   
 [![PyPI Version](https://img.shields.io/pypi/v/raztint)](https://pypi.org/project/raztint/)
-[![PyPI Downloads](https://img.shields.io/pypi/dm/raztint)](https://pypi.org/project/raztint/)
+[![PyPI Downloads](https://static.pepy.tech/badge/raztint)](https://pepy.tech/project/raztint)
 [![Python Versions](https://img.shields.io/pypi/pyversions/raztint)](https://pypi.org/project/raztint/)
 [![License](https://img.shields.io/pypi/l/raztint)](https://github.com/razbuild/raztint/blob/master/LICENSE)
 [![Zero Dependencies](https://img.shields.io/badge/dependencies-zero-brightgreen)](https://github.com/razbuild/raztint)
@@ -99,7 +99,7 @@ See [Getting Started](docs/getting-started.md) for more examples.
 | [Getting Started](docs/getting-started.md) | Functional usage, `paint()`, and the `tint` instance |
 | [API Reference](docs/api-reference.md) | Colors, styles, icons, and `RazTint` class methods |
 | [Intents](docs/intents.md) | Semantic presets for common CLI messages |
-| [Security & Redaction](docs/security.md) | Masking tokens, credentials, and custom rules |
+| [Security & Redaction](docs/redaction.md) | Masking tokens, credentials, and custom rules |
 | [Icons & Detection](docs/icons-and-detection.md) | Icon modes and font/color detection logic |
 | [Configuration](docs/configuration.md) | Environment variables and runtime toggles |
 | [Development](docs/development.md) | Local setup, tests, and linting |
