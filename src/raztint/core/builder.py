@@ -1,0 +1,54 @@
+from collections.abc import Callable
+
+from ..core.protocols import DynamicInstance
+from ..icons.registry import ICONS
+
+
+def register_dynamic_methods(instance: DynamicInstance) -> None:
+    """Attach color, background, style, and icon callables to a RazTint instance."""
+    colors = instance.colors
+    backgrounds = instance.backgrounds
+    styles = instance.styles
+
+    for name, code in colors.items():
+        setattr(instance, name.lower(), _make_color_func(instance, code))
+
+    for name, code in backgrounds.items():
+        setattr(instance, name.lower(), _make_background_func(instance, code))
+
+    for name, (on, off) in styles.items():
+        setattr(instance, name.lower(), _make_style_func(instance, on, off))
+
+    for name, data in ICONS.items():
+        color_key = data.get("color", "WHITE")
+        color_code = colors.get(color_key, "37")
+        setattr(instance, name.lower(), _make_icon_func(instance, data, color_code))
+
+
+def _make_color_func(instance: DynamicInstance, code: str) -> Callable[[str], str]:
+    return lambda text: instance.color(text, code)
+
+
+def _make_background_func(instance: DynamicInstance, code: str) -> Callable[[str], str]:
+    return lambda text: instance.background(text, code)
+
+
+def _make_style_func(
+    instance: DynamicInstance, on: str, off: str
+) -> Callable[[str], str]:
+    return lambda text: instance.style(text, on, off)
+
+
+def _make_icon_func(
+    instance: DynamicInstance, data: dict[str, str], code: str
+) -> Callable[[], str]:
+    def fn() -> str:
+        if instance.icon_mode == "nerd":
+            symbol = data["nerd"]
+        elif instance.icon_mode == "std":
+            symbol = data["std"]
+        else:
+            symbol = data["ascii"]
+        return instance.color(symbol, code)
+
+    return fn

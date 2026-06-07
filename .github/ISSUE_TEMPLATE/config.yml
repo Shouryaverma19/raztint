@@ -1,9 +1,0 @@
-blank_issues_enabled: false
-contact_links:
-  - name: 💬 Discussions
-    url: https://github.com/razbuild/raztint/discussions
-    about: Ask questions and discuss ideas with the community
-  - name: 📚 Documentation
-    url: https://github.com/razbuild/raztint#readme
-    about: Check the README for usage examples and API reference
-

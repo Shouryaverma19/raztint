@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.7.0] - 2026-06-07
+
+### Added
+
+- **Modular package layout** — split monolithic modules into focused packages: `core`, `data`, `detect`, `formatting`, `icons`, and `security`.
+- **Semantic intents** — `paint(..., intent="success")` and presets for `danger`, `warning`, `info`, `pending`, and `debug` via `INTENTS` / `IntentConfig`.
+- **Secret redaction** — `redact()` and `paint(..., redact=True)` with built-in `DEFAULT_RULES` for tokens, JWTs, credentials, and common secrets; custom `MaskRule` support.
+- **Typed public API** — `ColorName`, `StyleName`, `IconName`, `IconMode`, `IntentName` literals, `py.typed` marker, and `.pyi` stubs for IDE autocompletion.
+- **`paint()` enhancements** — intent defaults, redaction, and `UnsetType` sentinel for optional icon inheritance.
+- **`core/protocols.py`** — shared Protocol types for formatting, icons, and dynamic method registration.
+- **Documentation site** — new `docs/` directory with guides (getting started, API, intents, security, icons, configuration, development); README trimmed to a landing page.
+- **128 unit tests** organized under `tests/unit/` mirroring the package structure.
+
+### Changed
+
+- **`paint()`** remains the module-level alias for `tint.format_text()`; implementation moved to `formatting/paint.py`.
+- **README** simplified; detailed tutorials and API reference moved to `docs/`.
+- **Development workflow** standardized on **uv** only (`uv sync --group dev`, `uv run …`).
+- **CI** aligned with uv: single `dev` dependency group, ruff + ty + pytest/coverage across Python 3.10–3.14 and Linux/macOS/Windows.
+- **Removed Black** from dev dependencies and CI; formatting handled by `ruff format`.
+- **`pyproject.toml`** — fixed classifier placement, added `[tool.uv.build-backend]` with `module-root = "src"`, synced `dependency-groups` with CI.
+
+### Removed
+
+- Legacy flat modules: `colors.py`, `core.py`, `styles.py`, `icons.py`, `env_detect.py`, `font_detect.py`.
+- Black formatter configuration and CI step.
+
+---
+
 ## [0.6.0] - 2026-05-13
 
 ### Added

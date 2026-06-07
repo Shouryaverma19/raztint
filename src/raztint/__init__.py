@@ -1,6 +1,17 @@
 from importlib.metadata import version
 
 from .core import RazTint
+from .data import (
+    INTENTS,
+    BackgroundColorName,
+    ColorName,
+    IconMode,
+    IconName,
+    IntentConfig,
+    IntentName,
+    StyleName,
+)
+from .security import DEFAULT_RULES, MaskRule, redact
 
 __version__ = version("raztint")
 
@@ -10,7 +21,6 @@ ok = tint.ok
 err = tint.err
 warn = tint.warn
 info = tint.info
-
 black = tint.black
 red = tint.red
 green = tint.green
@@ -27,7 +37,6 @@ bright_blue = tint.bright_blue
 bright_magenta = tint.bright_magenta
 bright_cyan = tint.bright_cyan
 bright_white = tint.bright_white
-
 bg_black = tint.bg_black
 bg_red = tint.bg_red
 bg_green = tint.bg_green
@@ -44,14 +53,12 @@ bg_bright_blue = tint.bg_bright_blue
 bg_bright_magenta = tint.bg_bright_magenta
 bg_bright_cyan = tint.bg_bright_cyan
 bg_bright_white = tint.bg_bright_white
-
 bold = tint.bold
 dim = tint.dim
 italic = tint.italic
 underline = tint.underline
 strikethrough = tint.strikethrough
-
-format_text = tint.format_text
+paint = tint.format_text
 
 __all__ = [
     "RazTint",
@@ -97,6 +104,17 @@ __all__ = [
     "italic",
     "underline",
     "strikethrough",
-    "format_text",
+    "paint",
+    "redact",
+    "MaskRule",
+    "DEFAULT_RULES",
+    "INTENTS",
+    "IntentConfig",
+    "ColorName",
+    "BackgroundColorName",
+    "StyleName",
+    "IconName",
+    "IconMode",
+    "IntentName",
     "__version__",
 ]
