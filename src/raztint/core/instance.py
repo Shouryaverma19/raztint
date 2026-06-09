@@ -9,7 +9,7 @@ from ..data.types import (
     IntentName,
     StyleName,
 )
-from ..detect import get_icon_mode, has_nerd_fonts, supports_color
+from ..detect import supports_color
 from ..formatting.paint import UNSET, IconArg
 from ..formatting.paint import format_text as paint_text
 from ..icons.registry import ICONS
@@ -29,13 +29,21 @@ class RazTint:
         self.styles = STYLES
 
         self.use_color: bool = supports_color()
-        self.icon_mode: IconMode = get_icon_mode()
+        self.icon_mode: IconMode = self._get_icon_mode()
 
         register_dynamic_methods(cast(DynamicInstance, self))
 
     @staticmethod
     def _has_nerd_fonts() -> bool:
+        from ..detect.fonts import has_nerd_fonts
+
         return has_nerd_fonts()
+
+    @classmethod
+    def _get_icon_mode(cls) -> IconMode:
+        from ..detect.env import get_icon_mode
+
+        return get_icon_mode(nerd_font_detector=cls._has_nerd_fonts)
 
     def color(self, text: str, fg_code: str) -> str:
         return apply_color(text, fg_code, use_color=self.use_color)

@@ -33,11 +33,11 @@ print(info(), "For your information")
 
 ## Detection logic
 
-RazTint determines icon mode at startup (cached):
+RazTint determines an instance's default icon mode at initialization:
 
 ### 1. ASCII mode
 
-Used when stdout encoding cannot represent Nerd Font or Unicode icon characters.
+Used when stdout encoding cannot represent the Nerd Font probe character. In practice, this is the fallback mode for terminals that cannot reliably display the richer icon sets.
 
 ### 2. Nerd Font mode
 
@@ -93,7 +93,7 @@ Color support is determined by checking (in order):
 4. On Windows: Virtual Terminal processing is enabled
 5. `TERM` is set and not `"dumb"`
 
-When color is disabled, color functions return plain text and `paint()` returns the icon's plain/ASCII symbol plus unstyled text.
+When color is disabled, color functions return plain text and `paint()` returns the icon symbol for the active mode plus unstyled text.
 
 Toggle at runtime:
 

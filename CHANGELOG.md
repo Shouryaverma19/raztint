@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.7.1] - 2026-06-09
+
+### Fixed
+
+- Refined `RazTint` icon mode initialization to resolve environment detection through an injected Nerd Font detector, reducing import coupling and making the detection path easier to test.
+- Stabilized the module-level icon helper test by restoring the global `tint` state after mutating icon and color settings.
+
+### Docs
+
+- Clarified icon mode behavior across Nerd Font, standard Unicode, and ASCII fallbacks in the README and detection docs.
+- Documented `paint(..., reset=False)` behavior more precisely and clarified that icons are still emitted when color is disabled.
+- Updated documentation links and wording around redaction, configuration, and typing/stub locations.
+
+---
+
 ## [0.7.0] - 2026-06-07
 
 ### Added

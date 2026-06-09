@@ -45,9 +45,9 @@ NO_COLOR=1 python app.py
 RAZTINT_NO_COLOR=1 python app.py
 ```
 
-### Force ASCII icons in restricted environments
+### Force standard Unicode icons without Nerd Fonts
 
-If encoding cannot represent Unicode, RazTint falls back automatically. To force Unicode without Nerd Fonts:
+If encoding cannot represent the required characters, RazTint falls back to ASCII automatically. To disable Nerd Font icons while still allowing the standard Unicode set:
 
 ```bash
 RAZTINT_NO_NERD_ICONS=1 python app.py

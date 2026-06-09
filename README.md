@@ -22,7 +22,7 @@
 ## Why RazTint?
 
 - **Zero dependencies** — Python ≥ 3.10 standard library only
-- **Smart icons** — Nerd Font → Unicode → ASCII fallback, detected automatically
+- **Smart icons** — Nerd Font → Unicode → ASCII fallback, with environment-aware detection
 - **Cross-platform behavior** — Linux, macOS, and Windows, including CI
 - **Minimal setup** — import and use; detection is cached and fast
 
@@ -68,9 +68,9 @@ uv sync
 ```python
 from raztint import green, ok, paint
 
-print(green("Success!"))          # green text
-print(f"{ok()} File saved.")      # ✓  File saved.
-print(paint("Connection failed.", color="red", icon="err"))  # ✗  Connection failed.
+print(green("Success!"))
+print(f"{ok()} File saved.")
+print(paint("Connection failed.", color="red", icon="err"))
 
 # Semantic intents
 print(paint("Deployment complete.", intent="success"))
@@ -88,7 +88,7 @@ print(redact("password=supersecret api_key=ghp_abc123"))
 # password=**** api_key=****
 ```
 
-See [Getting Started](docs/getting-started.md) for more examples.
+See [Getting Started](docs/getting-started.md) for more examples. Icon output depends on the detected mode: Nerd Font, standard Unicode, or ASCII.
 
 ---
 
@@ -100,7 +100,7 @@ See [Getting Started](docs/getting-started.md) for more examples.
 | [API Reference](docs/api-reference.md) | Colors, styles, icons, and `RazTint` class methods |
 | [Intents](docs/intents.md) | Semantic presets for common CLI messages |
 | [Security & Redaction](docs/redaction.md) | Masking tokens, credentials, and custom rules |
-| [Icons & Detection](docs/icons-and-detection.md) | Icon modes and font/color detection logic |
+| [Icons & Detection](docs/icons-and-detection.md) | Icon modes and environment/font/color detection logic |
 | [Configuration](docs/configuration.md) | Environment variables and runtime toggles |
 | [Development](docs/development.md) | Local setup, tests, and linting |
 

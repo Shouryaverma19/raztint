@@ -1,5 +1,6 @@
 import os
 import sys
+from collections.abc import Callable
 from functools import lru_cache
 
 from ..data.types import IconMode
@@ -74,7 +75,10 @@ def clear_env_cache() -> None:
     _encoding_supports_nerd.cache_clear()
 
 
-def get_icon_mode() -> IconMode:
+def get_icon_mode(*, nerd_font_detector: Callable[[], bool] | None = None) -> IconMode:
+    if nerd_font_detector is None:
+        nerd_font_detector = has_nerd_fonts
+
     encoding = getattr(sys.stdout, "encoding", None) or "utf-8"
     if not _encoding_supports_nerd(encoding):
         debug(f"Icon mode: encoding {encoding!r} cannot encode Nerd icons, using ascii")
@@ -88,7 +92,7 @@ def get_icon_mode() -> IconMode:
         debug("Icon mode forced to 'std' via RAZTINT_NO_NERD_ICONS")
         return "std"
 
-    if has_nerd_fonts():
+    if nerd_font_detector():
         debug("Icon mode: nerd fonts detected, using 'nerd'")
         return "nerd"
 

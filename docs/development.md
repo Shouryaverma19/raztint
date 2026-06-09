@@ -73,7 +73,7 @@ tests/
 
 ## Typing
 
-The package ships with `py.typed` and stub files (`.pyi`) for key modules. Public `Literal` types live in `raztint.data.types` and are re-exported from `raztint`.
+The package ships with `py.typed` and a top-level stub file `src/raztint/__init__.pyi`. Public `Literal` types live in `raztint.data.types` and are re-exported from `raztint`.
 
 ```bash
 uv run ty check src

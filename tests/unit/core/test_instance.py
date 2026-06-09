@@ -105,15 +105,23 @@ class TestColorizer:
 
     def test_module_level_icon_helpers_are_distinct(self):
         """Module-level ok/err/warn/info must not all alias tint.ok."""
+        original_icon_mode = tint.icon_mode
+        original_use_color = tint.use_color
         raztint = RazTint()
         raztint.icon_mode = "std"
         raztint.set_color(False)
+        tint.icon_mode = "std"
+        tint.set_color(False)
 
-        assert ok() == raztint.ok()
-        assert err() == raztint.err()
-        assert warn() == raztint.warn()
-        assert info() == raztint.info()
-        assert ok() != err()
+        try:
+            assert ok() == raztint.ok()
+            assert err() == raztint.err()
+            assert warn() == raztint.warn()
+            assert info() == raztint.info()
+            assert ok() != err()
+        finally:
+            tint.icon_mode = original_icon_mode
+            tint.set_color(original_use_color)
 
     def test_env_no_color(self):
         """Test NO_COLOR environment variable."""

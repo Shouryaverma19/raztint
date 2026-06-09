@@ -35,7 +35,7 @@ paint(
 | `color` | `ColorName \| int \| None` | Foreground color name (e.g. `"red"`) or ANSI code (e.g. `31`). |
 | `bg` | `BackgroundColorName \| int \| None` | Background color name (e.g. `"bg_red"`, `"red"`) or ANSI code (e.g. `41`). |
 | `styles` | `StyleName \| list[StyleName] \| None` | Style name or list of style names. |
-| `reset` | `bool` | If `True` (default), full reset after text. If `False`, style-specific resets only. |
+| `reset` | `bool` | If `True` (default), full reset after text. If `False`, style-specific resets are emitted only when styles are used; otherwise no reset is appended. |
 | `icon` | `IconName \| None` | Icon key to prepend: `"ok"`, `"err"`, `"warn"`, `"info"`. |
 | `icon_mode` | `IconMode \| None` | Override icon mode: `"auto"`, `"nerd"`, `"std"`, or `"ascii"`. |
 | `redact` | `bool` | If `True`, mask sensitive data in `text` before formatting. |
@@ -52,7 +52,7 @@ paint(
 | `"std"` | Unicode icon; falls back to `ascii` if unavailable |
 | `"ascii"` | Always ASCII |
 
-**Returns:** Formatted string with ANSI codes if color is enabled, plain text otherwise.
+**Returns:** Formatted string with ANSI codes if color is enabled. When color is disabled, text is returned unchanged unless an icon is requested, in which case the plain icon prefix is still included.
 
 **Raises:**
 
@@ -148,7 +148,7 @@ To combine an icon with formatted text in one call, use `paint(..., icon="ok")` 
 
 ## `redact()`
 
-Mask sensitive data using regex rules. See [Security & Redaction](security.md).
+Mask sensitive data using regex rules. See [Security & Redaction](redaction.md).
 
 ```python
 from raztint import redact, MaskRule
@@ -239,7 +239,7 @@ from raztint import (
     paint,
     redact, MaskRule, DEFAULT_RULES,
     INTENTS, IntentConfig,
-    ColorName, BackgroundColorName, StyleName, IconName, IconMode, IntentName,
+    ColorName, BackgroundColorName, StyleName, IconMode, IntentName,
     __version__,
 )
 ```
