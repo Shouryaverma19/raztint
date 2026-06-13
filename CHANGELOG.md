@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.8.0] - 2026-06-13
+
+### Added
+
+- Added True Color and 256-color support via `rgb`, `hex_color`, and `color256` APIs (#6, #13) (by [@13-Prabhat](https://github.com/13-Prabhat))
+- Introduced new icons for `Pending` and `debug` states
+
+### Tests
+
+- Added test coverage for True Color and 256-color functionality
+
+### Docs
+
+- Added `examples` directory with usage samples (#9, #12) (by [@13-Prabhat](https://github.com/13-Prabhat))
+- Added tutorial documentation to improve onboarding (#9, #12) (by [@13-Prabhat](https://github.com/13-Prabhat))
+- Enhanced README with clearer structure and extended usage explanations (#9, #12) (by [@13-Prabhat](https://github.com/13-Prabhat))
+- Added `preview.png` and updated README preview section (#10, #11) (by [@13-Prabhat](https://github.com/13-Prabhat))
+
+---
+
 ## [0.7.1] - 2026-06-09
 
 ### Fixed

@@ -60,7 +60,7 @@ BackgroundColorName = Literal[
 
 StyleName = Literal["bold", "dim", "italic", "underline", "strikethrough"]
 
-IconName = Literal["ok", "err", "warn", "info"]
+IconName = Literal["ok", "err", "warn", "info", "pending", "debug"]
 
 IconMode = Literal["auto", "nerd", "std", "ascii"]
 
