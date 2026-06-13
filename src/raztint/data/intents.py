@@ -13,7 +13,7 @@ INTENTS: dict[str, IntentConfig] = {
     "success": IntentConfig(color="green", icon="ok", styles="bold"),
     "danger": IntentConfig(color="red", icon="err", styles="bold"),
     "warning": IntentConfig(color="yellow", icon="warn", styles=None),
-    "pending": IntentConfig(color="cyan", icon="pending", styles="italic"),
-    "debug": IntentConfig(color="gray", icon="debug", styles="dim"),
+    "pending": IntentConfig(color="cyan", icon=None, styles="italic"),
+    "debug": IntentConfig(color="gray", icon=None, styles="dim"),
     "info": IntentConfig(color="blue", icon="info", styles=None),
 }

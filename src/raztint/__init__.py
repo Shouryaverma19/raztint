@@ -21,8 +21,6 @@ ok = tint.ok
 err = tint.err
 warn = tint.warn
 info = tint.info
-debug = tint.debug
-pending = tint.pending
 black = tint.black
 red = tint.red
 green = tint.green
@@ -77,8 +75,6 @@ __all__ = [
     "err",
     "warn",
     "info",
-    "debug",
-    "pending",
     "black",
     "red",
     "green",
