@@ -28,6 +28,7 @@
 - [Installation](#installation)
 - [Quick Start](#quick-start)
 - [Documentation](#documentation)
+- [Extended Colors](#extended-colors)
 - [Known Limitations](#known-limitations)
 - [Contributing](#contributing)
 - [License](#license)
@@ -48,6 +49,7 @@
 ## Features
 
 - 🎨 Full ANSI 16-color foreground and background support
+- 🌈 Extended colors: 24-bit True Color (`rgb`, `hex_color`) and 256-color (`color256`)
 - ✨ Text styles: bold, dim, italic, underline, strikethrough
 - 🔍 Status icons with three-tier fallback and environment-aware detection
 - 🖌️ **`paint()`** — one call for color, background, styles, and icons
@@ -129,6 +131,36 @@ See [Getting Started](docs/getting-started.md) for more examples. Icon output de
 | [`examples/basic_usage.py`](examples/basic_usage.py) | Colors, styles, icons, intents, and redaction in one script |
 | [`examples/format_text_demo.py`](examples/format_text_demo.py) | Full `paint()` showcase — every color, style, and icon mode |
 | [`examples/real_world_cli.py`](examples/real_world_cli.py) | Simulated file-processor CLI showing real integration patterns |
+
+---
+
+## Extended Colors
+
+RazTint supports **24-bit True Color** and **256-color** mode via raw ANSI escape sequences — no extra dependencies.
+
+```python
+from raztint import rgb, hex_color, color256
+from raztint import bg_rgb, bg_hex_color, bg_color256
+
+# True Color foreground
+print(rgb("This is orange text", 255, 100, 50))
+print(hex_color("Same orange via hex", "#FF6432"))
+
+# True Color background
+print(bg_rgb("Orange background", 255, 100, 50))
+print(bg_hex_color("Same via hex", "#FF6432"))
+
+# 256-color
+print(color256("Orange via 256 palette", 208))
+print(bg_color256("Background 256", 208))
+
+# Compose freely with existing helpers
+from raztint import bold
+print(bold(rgb("Bold True Color text", 0, 200, 0)))
+print(rgb(bg_color256("White on orange bg", 208), 255, 255, 255))
+```
+
+> **Terminal support:** True Color requires a terminal that supports `TERM=xterm-256color` or similar. `NO_COLOR` and `RAZTINT_FORCE_COLOR` are respected.
 
 ---
 
