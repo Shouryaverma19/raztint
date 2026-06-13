@@ -201,6 +201,8 @@ class TestColorizer:
                 assert raztint.err() == "[ERR]"
                 assert raztint.warn() == "[WARN]"
                 assert raztint.info() == "[INFO]"
+                assert raztint.debug() == "[DEBUG]"
+                assert raztint.pending() == "[PENDING]"
 
     def test_set_color_method(self):
         """Test toggling color via set_color."""

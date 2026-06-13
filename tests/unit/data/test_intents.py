@@ -18,7 +18,3 @@ def test_intent_config_shape() -> None:
     assert cfg.color == "green"
     assert cfg.icon == "ok"
     assert cfg.styles == "bold"
-
-
-def test_pending_has_no_icon() -> None:
-    assert INTENTS["pending"].icon is None

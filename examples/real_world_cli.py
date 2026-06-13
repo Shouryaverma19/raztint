@@ -67,9 +67,11 @@ def run() -> None:
     header("File Processor v1.0")
     status("Initialising…")
 
-    # Log config — secrets automatically masked
-    config_log = f"api_key={CONFIG['api_key']}  db={CONFIG['db_url']}"
-    print(paint(f"  Config: {config_log}", intent="debug", redact=True))
+    # Log config — do not include raw secrets in log payloads
+    config_log = (
+        f"output_dir={CONFIG['output_dir']}  api_key=[REDACTED]  db_url=[REDACTED]"
+    )
+    print(paint(f"     Config: {config_log}", intent="debug", redact=True, icon=None))
     time.sleep(0.2)
 
     # ── Validation ────────────────────────────────────────────────────────────

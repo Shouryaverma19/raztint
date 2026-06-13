@@ -25,6 +25,8 @@ class RazTint:
     err: _IconFn
     warn: _IconFn
     info: _IconFn
+    pending: _IconFn
+    debug: _IconFn
     black: _TextFn
     red: _TextFn
     green: _TextFn

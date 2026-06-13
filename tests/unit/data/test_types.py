@@ -27,5 +27,5 @@ def test_style_name_literal_matches_styles() -> None:
 
 
 def test_icon_and_intent_literals() -> None:
-    assert set(get_args(IconName)) == {"ok", "err", "warn", "info"}
+    assert set(get_args(IconName)) == {"ok", "err", "warn", "info", "pending", "debug"}
     assert set(get_args(IntentName)) == set(INTENTS)
