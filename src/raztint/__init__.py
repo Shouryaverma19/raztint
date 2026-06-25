@@ -77,6 +77,8 @@ __all__ = [
     "err",
     "warn",
     "info",
+    "pending",
+    "debug",
     "black",
     "red",
     "green",
