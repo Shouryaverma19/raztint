@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.8.1] - 2026-06-25
+
+### Fixed
+
+- Fixed missing exports in `__all__` by adding `debug` and `pending` to public API surface
+
+### Changed
+
+- Decoupled type checking configuration by moving `ty` configuration to standalone `ty.toml`
+- Decoupled linting configuration by externalizing `ruff` configuration
+- Simplified and cleaned up `pyproject.toml` for better maintainability
+- Updated dependency lockfile (`uv.lock`) to reflect latest environment state
+
+### Internal
+
+- Improved project tooling structure without affecting runtime behavior
+
+---
+
 ## [0.8.0] - 2026-06-13
 
 ### Added
