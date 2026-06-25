@@ -85,9 +85,8 @@ uv sync
 ## Quick Start
 
 ```python
-from raztint import green, ok, paint
+from raztint import ok, paint
 
-print(green("Success!"))
 print(f"{ok()} File saved.")
 print(paint("Connection failed.", color="red", icon="err"))
 

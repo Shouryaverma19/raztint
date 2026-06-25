@@ -1,0 +1,18 @@
+[src]
+include = ["src/raztint", "tests"]
+exclude = ["src/generated"]
+
+[environment]
+root = ["src"]
+
+[analysis]
+respect-type-ignore-comments = true
+
+[rules]
+all = "error"
+unresolved-attribute = "ignore"
+unused-ignore-comment = "ignore"
+
+[terminal]
+error-on-warning = true
+output-format = "concise"

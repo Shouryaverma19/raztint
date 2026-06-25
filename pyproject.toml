@@ -4,14 +4,16 @@ build-backend = "uv_build"
 
 [project]
 name = "raztint"
-version = "0.8.0"
+version = "0.8.1"
 description = "A zero-dependency Python library for ANSI coloring and smart CLI icons with automatic environment detection"
 readme = { file = "README.md", content-type = "text/markdown" }
 requires-python = ">=3.10"
 license = { text = "MIT" }
+
 maintainers = [
-    { name = "Raz", email = "real.raz.dev@gmail.com" }
+    { name = "Raz", email = "real.raz.dev@gmail.com" },
 ]
+
 keywords = [
     "terminal",
     "color",
@@ -25,6 +27,7 @@ keywords = [
     "text-coloring",
     "cross-platform",
 ]
+
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
@@ -51,69 +54,36 @@ Issues = "https://github.com/razbuild/raztint/issues"
 Changelog = "https://github.com/razbuild/raztint/releases"
 
 [dependency-groups]
-dev = ["coverage", "pytest", "ruff", "ty"]
+dev = [
+    "coverage",
+    "pytest",
+    "ruff",
+    "ty",
+]
 
 [tool.uv.build-backend]
 module-root = "src"
 
-[tool.ruff]
-line-length = 88
-target-version = "py313"
-exclude = [
-    ".git",
-    "__pycache__",
-    "build",
-    "dist",
-    ".venv",
-    "venv",
-]
-
-[tool.ruff.lint]
-select = [
-    "E",
-    "W",
-    "F",
-    "I",
-    "UP",
-]
-ignore = []
-
-[tool.ruff.lint.per-file-ignores]
-"__init__.py" = ["F401"]
-"*.pyi" = ["F401"]
-
-[tool.ty.src]
-include = ["src/raztint", "tests"]
-exclude = ["src/generated"]
-
-[tool.ty.analysis]
-respect-type-ignore-comments = true
-
-[tool.ty.rules]
-all = "error"
-unresolved-attribute = "ignore"
-unused-ignore-comment = "ignore"
-
-[tool.ty.terminal]
-error-on-warning = true
-output-format = "concise"
-
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
+
 addopts = [
     "-v",
     "--strict-markers",
     "--strict-config",
 ]
+
 markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
 ]
 
 [tool.coverage.run]
 source = ["src"]
+
 omit = [
     "*/tests/*",
     "*/test_*.py",
