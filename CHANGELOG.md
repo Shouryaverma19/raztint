@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.8.2] - 2026-06-28
+
+### Fixed
+
+- Normalized type hint imports in public API module (`__init__.pyi`)
+- Improved type hint consistency by simplifying and deduplicating `data.types` imports
+- Fixed minor static type-checking inconsistencies affecting IDEs and type checkers
+
+### Internal
+
+- Refactored type annotation style without changing runtime behavior
+
+---
+
 ## [0.8.1] - 2026-06-25
 
 ### Fixed
