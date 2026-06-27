@@ -3,13 +3,11 @@ from collections.abc import Callable
 from .core.instance import RazTint as RazTint
 from .data import INTENTS as INTENTS
 from .data import IntentConfig as IntentConfig
-from .data.types import (
-    BackgroundColorName,
-    ColorName,
-    IconMode,
-    IntentName,
-    StyleName,
-)
+from .data.types import BackgroundColorName as BackgroundColorName
+from .data.types import ColorName as ColorName
+from .data.types import IconMode as IconMode
+from .data.types import IntentName as IntentName
+from .data.types import StyleName as StyleName
 from .formatting.paint import UNSET, IconArg
 from .security import DEFAULT_RULES as DEFAULT_RULES
 from .security import MaskRule as MaskRule
