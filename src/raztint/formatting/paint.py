@@ -1,6 +1,4 @@
-from functools import lru_cache
-
-from typing_extensions import Sentinel
+from typing import cast
 
 from ..core.protocols import FormatTarget
 from ..data import INTENTS
@@ -24,8 +22,18 @@ from .codes import (
 
 _RESET_FULL = "\033[0m"
 
-UNSET = Sentinel("UNSET")
-type IconArg = IconName | None | UNSET
+
+class UnsetType:
+    """Sentinel type for parameters that inherit intent defaults."""
+
+    __slots__ = ()
+
+    def __repr__(self) -> str:  # ty: ignore
+        return "UNSET"
+
+
+UNSET = UnsetType()
+IconArg = IconName | None | UnsetType
 
 
 def _icon_prefix(
@@ -39,44 +47,6 @@ def _icon_prefix(
         mode=icon_mode,
         has_nerd_fonts=instance._has_nerd_fonts,
     )
-
-
-@lru_cache(maxsize=1024)
-def _resolve_codes(
-    color: ColorName | int | None,
-    bg: BackgroundColorName | int | None,
-    style_list: tuple[str, ...],
-    reset: bool,
-) -> tuple[str, str]:
-    codes: list[str] = []
-
-    fg_code = get_color_code(color)
-    if fg_code:
-        codes.append(fg_code)
-
-    bg_code = get_background_code(bg)
-    if bg_code:
-        codes.append(bg_code)
-
-    style_offs: list[str] = []
-    for style_name in style_list:
-        on, off = get_style_codes(style_name)
-        codes.append(on)
-        if not reset:
-            style_offs.append(off)
-
-    if not codes:
-        return "", ""
-
-    opening = f"\033[{';'.join(codes)}m"
-    if reset:
-        closing = _RESET_FULL
-    elif style_offs:
-        closing = f"\033[{';'.join(style_offs)}m"
-    else:
-        closing = ""
-
-    return opening, closing
 
 
 def format_text(
@@ -107,14 +77,18 @@ def format_text(
         if styles is None:
             styles = cfg.styles
 
-    active_icon = None if icon is UNSET else icon
+    if icon is UNSET:
+        icon = None
+
+    active_icon = cast(IconName | None, icon)
 
     if redact:
         text = mask_sensitive(text, redact_rules)
 
+    use_color = instance.use_color
     has_icon = active_icon is not None
 
-    if not instance.use_color:
+    if not use_color:
         if not has_icon:
             return text
         assert active_icon is not None
@@ -128,10 +102,34 @@ def format_text(
         assert active_icon is not None
         prefix = f"{_icon_prefix(instance, active_icon, icon_mode)} "
 
-    style_list = normalize_styles(styles)
-    opening, closing = _resolve_codes(color, bg, style_list, reset)
+    fg_code = get_color_code(color, instance.colors)
+    bg_code = get_background_code(bg, instance.backgrounds)
 
-    if not opening:
-        return f"{prefix}{text}" if prefix else text
+    style_list = normalize_styles(styles)
+    if not prefix and not fg_code and not bg_code and not style_list:
+        return text
+
+    codes: list[str] = []
+    if fg_code:
+        codes.append(fg_code)
+    if bg_code:
+        codes.append(bg_code)
+
+    style_codes: list[tuple[str, str]] = []
+    for style_name in style_list:
+        on, off = get_style_codes(style_name, instance.styles)
+        style_codes.append((on, off))
+        codes.append(on)
+
+    if not codes:
+        return f"{prefix}{text}"
+
+    opening = f"\033[{';'.join(codes)}m"
+    if reset:
+        closing = _RESET_FULL
+    elif style_codes:
+        closing = f"\033[{';'.join(off for _, off in style_codes)}m"
+    else:
+        closing = ""
 
     return f"{prefix}{opening}{text}{closing}"
