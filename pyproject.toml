@@ -59,6 +59,7 @@ dev = [
     "pytest",
     "ruff",
     "ty",
+    "typing_extensions",
 ]
 
 [tool.uv.build-backend]

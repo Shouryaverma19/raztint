@@ -4,6 +4,7 @@ exclude = ["src/generated"]
 
 [environment]
 root = ["src"]
+python-version = "3.12"
 
 [analysis]
 respect-type-ignore-comments = true
