@@ -3,10 +3,10 @@
   <br><br>
   
 [![PyPI Version](https://img.shields.io/pypi/v/raztint)](https://pypi.org/project/raztint/)
-[![PyPI Downloads](https://static.pepy.tech/badge/raztint)](https://pepy.tech/project/raztint)
-[![Python Versions](https://img.shields.io/pypi/pyversions/raztint)](https://pypi.org/project/raztint/)
-[![License](https://img.shields.io/pypi/l/raztint)](https://github.com/razbuild/raztint/blob/master/LICENSE)
 [![Zero Dependencies](https://img.shields.io/badge/dependencies-zero-brightgreen)](https://github.com/razbuild/raztint)
+
+[![Python Versions](https://img.shields.io/pypi/pyversions/raztint)](https://pypi.org/project/raztint/)
+[![PyPI Downloads](https://static.pepy.tech/badge/raztint)](https://pepy.tech/project/raztint)
 
   <p>A zero-dependency Python library for ANSI coloring and smart CLI icons that automatically adapt to your environment.</p>
 </div>
@@ -37,7 +37,8 @@
 
 ## Why RazTint?
 
-> 💡 RazTint believes terminal styling should be *zero-friction*: no dependencies, no configuration files, no guessing the user's environment. It figures out the rest so you can focus on your CLI logic.
+> [!NOTE]
+> RazTint believes terminal styling should be *zero-friction*: no dependencies, no configuration files, no guessing the user's environment. It figures out the rest so you can focus on your CLI logic.
 
 - **Zero dependencies** — Python ≥ 3.10 standard library only
 - **Smart icons** — Nerd Font → Unicode → ASCII fallback, with environment-aware detection
@@ -158,7 +159,7 @@ from raztint import bold
 print(bold(rgb("Bold True Color text", 0, 200, 0)))
 print(rgb(bg_color256("White on orange bg", 208), 255, 255, 255))
 ```
-
+> [!NOTE]
 > **Terminal support:** True Color requires a terminal that supports `TERM=xterm-256color` or similar. `NO_COLOR` and `RAZTINT_FORCE_COLOR` are respected.
 
 ---
@@ -181,7 +182,7 @@ See [CONTRIBUTING.md](https://github.com/razbuild/.github/blob/main/CONTRIBUTING
 
 ## License
 
-MIT License
+[![License](https://img.shields.io/pypi/l/raztint)](https://github.com/razbuild/raztint/blob/master/LICENSE)
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/razbuild/.github/main/profile/svg/badge.svg" alt="Made by RazBuild" width="160">
