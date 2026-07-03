@@ -5,89 +5,111 @@ from functools import lru_cache
 
 from .debug import debug
 
+_NERD_INDICATORS = (
+    "nerd",
+    "nf-",
+    "hack nerd",
+    "fira code nerd",
+    "jetbrains mono nerd",
+    "meslo nerd",
+    "cascadia code nerd",
+)
+
+_MAC_FONT_DIRS = (
+    os.path.expanduser("~/Library/Fonts"),
+    "/Library/Fonts",
+    "/System/Library/Fonts",
+)
+
+
+def _has_indicator(text: str) -> bool:
+    return any(indicator in text for indicator in _NERD_INDICATORS)
+
+
+def _check_mac_font_dirs() -> bool:
+    """Fast path: scan known font directories before falling back to system_profiler."""
+    for font_dir in _MAC_FONT_DIRS:
+        if not os.path.isdir(font_dir):
+            continue
+        try:
+            if any(_has_indicator(f.lower()) for f in os.listdir(font_dir)):
+                debug(f"Font detection (macOS): nerd font found in {font_dir}")
+                return True
+        except Exception as exc:
+            debug(f"Font detection (macOS) failed for {font_dir}: {exc!r}")
+    return False
+
+
+def _check_mac_system_profiler() -> bool:
+    """Slow path (~1-2s): only used if the fast directory scan finds nothing."""
+    try:
+        result = subprocess.run(
+            ["system_profiler", "SPFontsDataType"],
+            capture_output=True,
+            text=True,
+            timeout=2,
+        )
+        if result.returncode == 0 and _has_indicator(result.stdout.lower()):
+            debug("Font detection (macOS): nerd font found via system_profiler")
+            return True
+    except Exception as exc:
+        debug(f"Font detection (macOS system_profiler) failed: {exc!r}")
+    return False
+
+
+def _check_windows_fonts() -> bool:
+    try:
+        result = subprocess.run(
+            [
+                "powershell",
+                "-Command",
+                (
+                    "Get-ChildItem 'C:\\Windows\\Fonts' | "
+                    "Where-Object {$_.Name -like '*[Nn]erd*'} | "
+                    "Select-Object -First 1"
+                ),
+            ],
+            capture_output=True,
+            text=True,
+            timeout=2,
+        )
+        has_fonts = result.returncode == 0 and bool(result.stdout.strip())
+        debug(
+            f"Font detection (Windows): returncode={result.returncode}"
+            f"has_fonts={has_fonts}"
+        )
+        return has_fonts
+    except Exception as exc:
+        debug(f"Font detection (Windows) failed: {exc!r}")
+        return False
+
+
+def _check_posix_fonts() -> bool:
+    try:
+        result = subprocess.run(
+            ["fc-list", ":", "family"], capture_output=True, text=True, timeout=2
+        )
+        if result.returncode == 0:
+            found = _has_indicator(result.stdout.lower())
+            debug(
+                f"Font detection (POSIX): returncode={result.returncode}, found={found}"
+            )
+            return found
+    except Exception as exc:
+        debug(f"Font detection (POSIX) failed: {exc!r}")
+    return False
+
 
 @lru_cache(maxsize=1)
 def check_installed_nerd_fonts() -> bool:
     """Check if nerd fonts are installed on the system."""
     if os.name == "nt":
-        try:
-            result = subprocess.run(
-                [
-                    "powershell",
-                    "-Command",
-                    (
-                        "Get-ChildItem 'C:\\Windows\\Fonts' | "
-                        "Where-Object {$_.Name -like '*[Nn]erd*'} | "
-                        "Select-Object -First 1"
-                    ),
-                ],
-                capture_output=True,
-                text=True,
-                timeout=2,
-            )
-            has_fonts = result.returncode == 0 and bool(result.stdout.strip())
-            debug(
-                "Font detection (Windows): "
-                f"returncode={result.returncode}, has_fonts={has_fonts}"
-            )
-            return has_fonts
-        except Exception as exc:
-            debug(f"Font detection (Windows) failed: {exc!r}")
-            return False
+        return _check_windows_fonts()
 
     if sys.platform == "darwin":
-        try:
-            result = subprocess.run(
-                ["system_profiler", "SPFontsDataType"],
-                capture_output=True,
-                text=True,
-                timeout=2,
-            )
-            if result.returncode == 0 and any(
-                n in result.stdout.lower() for n in ["nerd", "nf-"]
-            ):
-                debug("Font detection (macOS): nerd font found via system_profiler")
-                return True
-        except Exception as exc:
-            debug(f"Font detection (macOS system_profiler) failed: {exc!r}")
+        return _check_mac_font_dirs() or _check_mac_system_profiler()
 
-        font_dirs = [
-            os.path.expanduser("~/Library/Fonts"),
-            "/Library/Fonts",
-            "/System/Library/Fonts",
-        ]
-        for font_dir in font_dirs:
-            if os.path.isdir(font_dir):
-                try:
-                    if any(
-                        "nerd" in f.lower() or "nf-" in f.lower()
-                        for f in os.listdir(font_dir)
-                    ):
-                        debug(f"Font detection (macOS): nerd font found in {font_dir}")
-                        return True
-                except Exception as exc:
-                    debug(f"Font detection (macOS) failed for {font_dir}: {exc!r}")
-                    continue
-    else:
-        try:
-            result = subprocess.run(
-                ["fc-list", ":", "family"], capture_output=True, text=True, timeout=2
-            )
-            if result.returncode == 0:
-                found = any(
-                    n in result.stdout.lower()
-                    for n in ["nerd", "nf-", "hack nerd", "fira code nerd"]
-                )
-                debug(
-                    "Font detection (POSIX): "
-                    f"returncode={result.returncode}, found={found}"
-                )
-                return found
-        except Exception as exc:
-            debug(f"Font detection (POSIX) failed: {exc!r}")
-
-    debug("Font detection: no nerd fonts detected")
-    return False
+    return _check_posix_fonts()
 
 
 @lru_cache(maxsize=1)
@@ -98,25 +120,11 @@ def has_nerd_fonts() -> bool:
         debug("Nerd fonts: enabled via NERDFONTS/NERD_FONTS")
         return True
 
-    indicators = [
-        "nerd",
-        "nf-",
-        "hack nerd",
-        "fira code nerd",
-        "jetbrains mono nerd",
-        "meslo nerd",
-        "cascadia code nerd",
-    ]
-
-    font_name = os.getenv("FONT_NAME", "").lower()
-    if font_name and any(name in font_name for name in indicators):
-        debug(f"Nerd fonts: enabled via FONT_NAME={font_name!r}")
-        return True
-
-    term_font = os.getenv("TERM_FONT", "").lower()
-    if term_font and any(name in term_font for name in indicators):
-        debug(f"Nerd fonts: enabled via TERM_FONT={term_font!r}")
-        return True
+    for var_name in ("FONT_NAME", "TERM_FONT"):
+        value = os.getenv(var_name, "").lower()
+        if value and _has_indicator(value):
+            debug(f"Nerd fonts: enabled via {var_name}={value!r}")
+            return True
 
     if os.getenv("RAZTINT_SKIP_SYSTEM_FONT_SCAN", "").lower() in (
         "1",

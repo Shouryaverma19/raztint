@@ -4,6 +4,7 @@
   
 [![PyPI Version](https://img.shields.io/pypi/v/raztint)](https://pypi.org/project/raztint/)
 [![Zero Dependencies](https://img.shields.io/badge/dependencies-zero-brightgreen)](https://github.com/razbuild/raztint)
+[![Codecov](https://img.shields.io/codecov/c/github/razbuild/raztint)](https://codecov.io/gh/razbuild/raztint)
 
 [![Python Versions](https://img.shields.io/pypi/pyversions/raztint)](https://pypi.org/project/raztint/)
 [![PyPI Downloads](https://static.pepy.tech/badge/raztint)](https://pepy.tech/project/raztint)
