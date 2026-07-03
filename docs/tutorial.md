@@ -8,13 +8,13 @@ A friendly walk-through for new users. By the end you will understand *why* RazT
 
 ## Philosophy
 
-> 💡 RazTint believes terminal styling should be *zero-friction*: no dependencies, no configuration files, no guessing the user's environment. It figures out the rest so you can focus on your CLI logic.
+> [!NOTE] RazTint believes terminal styling should be *zero-friction*: no dependencies, no configuration files, no guessing the user's environment. It figures out the rest so you can focus on your CLI logic.
 
 Three design rules flow from that:
 
-1. **Zero dependencies** — the standard library is enough.
-2. **Smart auto-detection** — colors and icons adapt to the terminal at import time.
-3. **Minimal decisions for the developer** — one function (`paint()`) covers almost every case.
+1. **Zero dependencies**: the standard library is enough.
+2. **Smart auto-detection**: colors and icons adapt to the terminal at import time.
+3. **Minimal decisions for the developer**: one function (`paint()`) covers almost every case.
 
 ---
 
@@ -233,11 +233,11 @@ _t.set_color(False)   # library output always plain — caller controls terminal
 
 ## See also
 
-- [Getting Started](getting-started.md) — API reference with all function signatures
-- [Icons & Detection](icons-and-detection.md) — full detection logic
-- [Configuration](configuration.md) — all environment variables
-- [Intents](intents.md) — full intent registry
-- [Security & Redaction](redaction.md) — custom mask rules
-- [`examples/basic_usage.py`](../examples/basic_usage.py) — runnable quick-start script
-- [`examples/format_text_demo.py`](../examples/format_text_demo.py) — full `paint()` showcase
-- [`examples/real_world_cli.py`](../examples/real_world_cli.py) — simulated CLI integration
+- [Getting Started](getting-started.md): API reference with all function signatures
+- [Icons & Detection](icons-and-detection.md): full detection logic
+- [Configuration](configuration.md): all environment variables
+- [Intents](intents.md): full intent registry
+- [Security & Redaction](redaction.md): custom mask rules
+- [`examples/basic_usage.py`](../examples/basic_usage.py): runnable quick-start script
+- [`examples/format_text_demo.py`](../examples/format_text_demo.py): full `paint()` showcase
+- [`examples/real_world_cli.py`](../examples/real_world_cli.py): simulated CLI integration

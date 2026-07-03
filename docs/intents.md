@@ -90,5 +90,5 @@ Valid names are listed in the error message and match `IntentName` in `raztint.d
 
 ## See also
 
-- [Getting Started — Intents](getting-started.md#intents)
-- [API Reference — `paint()`](api-reference.md#paint--format_text)
+- [Getting Started Intents](getting-started.md#intents)
+- [API Reference `paint()`](api-reference.md#paint--format_text)

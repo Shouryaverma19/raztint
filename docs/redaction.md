@@ -110,5 +110,5 @@ Redaction runs **before** ANSI formatting, so masked output never exposes the or
 
 ## See also
 
-- [API Reference — `redact()`](api-reference.md#redact)
-- [Getting Started — Redaction](getting-started.md#redaction)
+- [API Reference `redact()`](api-reference.md#redact)
+- [Getting Started Redaction](getting-started.md#redaction)

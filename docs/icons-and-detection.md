@@ -127,4 +127,4 @@ See [Configuration](configuration.md) for all environment variables.
 ## See also
 
 - [Configuration](configuration.md)
-- [API Reference — Icon functions](api-reference.md#icon-functions)
+- [API Reference Icon functions](api-reference.md#icon-functions)
