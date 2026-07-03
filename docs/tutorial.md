@@ -9,7 +9,7 @@ A friendly walk-through for new users. By the end you will understand *why* RazT
 ## Philosophy
 
 > [!NOTE] 
-> RazTint believes terminal styling should be *zero-friction*: no dependencies, no configuration files, no guessing the user's environment. It figures out the > > > rest so you can focus on your CLI logic.
+> RazTint believes terminal styling should be *zero-friction*: no dependencies, no configuration files, no guessing the user's environment. It figures out the rest so you can focus on your CLI logic.
 
 Three design rules flow from that:
 
